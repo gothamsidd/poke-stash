@@ -1,0 +1,43 @@
+.dark .dashboard-page {
+  background: var(--bg-primary);
+}
+
+.dark .dashboard-page h1 {
+  color: var(--text-primary);
+}
+
+.dark .stat-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .stat-card h3 {
+  color: var(--text-secondary);
+}
+
+.dark .stat-value {
+  color: #667eea;
+}
+
+.dark .dashboard-section {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .section-header h2 {
+  color: var(--text-primary);
+}
+
+.dark .empty-state {
+  color: var(--text-secondary);
+}
+
+.dark .products-table th {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.dark .products-table td {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-color);
+}

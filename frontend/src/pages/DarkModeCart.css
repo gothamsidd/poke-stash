@@ -1,0 +1,47 @@
+.dark .cart-page {
+  background: var(--bg-primary);
+}
+
+.dark .cart-page h1 {
+  color: var(--text-primary);
+}
+
+.dark .cart-items {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .cart-item {
+  border-bottom-color: var(--border-color);
+}
+
+.dark .item-info h3 {
+  color: var(--text-primary);
+}
+
+.dark .cart-summary {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .cart-summary h3 {
+  color: var(--text-primary);
+}
+
+.dark .summary-row {
+  color: var(--text-secondary);
+}
+
+.dark .summary-row.total {
+  color: var(--text-primary);
+  border-top-color: var(--border-color);
+}
+
+.dark .empty-cart {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .empty-cart p {
+  color: var(--text-secondary);
+}

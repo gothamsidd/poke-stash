@@ -1,0 +1,65 @@
+.dark .products-page {
+  background: var(--bg-primary);
+}
+
+.dark .products-header h1 {
+  color: var(--text-primary);
+}
+
+.dark .products-count {
+  color: var(--text-secondary);
+}
+
+.dark .filter-modal {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .filter-modal-header {
+  background: var(--card-bg);
+  border-bottom-color: var(--border-color);
+}
+
+.dark .filter-modal-header h3 {
+  color: var(--text-primary);
+}
+
+.dark .filter-group label {
+  color: var(--text-primary);
+}
+
+.dark .filter-group input,
+.dark .filter-group select {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.dark .product-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .product-info {
+  background: var(--card-bg);
+}
+
+.dark .product-info h3 {
+  color: var(--text-primary);
+}
+
+.dark .product-stats-mini {
+  background: var(--bg-secondary);
+}
+
+.dark .price {
+  color: #667eea;
+}
+
+.dark .no-products h3 {
+  color: var(--text-primary);
+}
+
+.dark .no-products p {
+  color: var(--text-secondary);
+}

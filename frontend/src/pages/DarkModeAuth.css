@@ -1,0 +1,41 @@
+.dark .auth-page {
+  background: #4a5568;
+}
+
+.dark .auth-container {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+.dark .auth-container h2 {
+  color: var(--text-primary);
+}
+
+.dark .form-group label {
+  color: var(--text-primary);
+}
+
+.dark .form-group input,
+.dark .form-group select {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.dark .auth-link {
+  color: var(--text-secondary);
+}
+
+.dark .auth-link a {
+  color: #667eea;
+}
+
+.dark .btn-google {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.dark .btn-google:hover {
+  background: var(--bg-secondary);
+}

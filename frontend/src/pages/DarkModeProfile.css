@@ -1,0 +1,52 @@
+.dark .profile-page {
+  background: var(--bg-secondary);
+}
+
+.dark .profile-header h1 {
+  color: var(--text-primary);
+}
+
+.dark .profile-header p {
+  color: var(--text-secondary);
+}
+
+.dark .profile-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .profile-form {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .form-section h3 {
+  color: var(--text-primary);
+}
+
+.dark .form-section {
+  border-bottom-color: var(--border-color);
+}
+
+.dark .form-group label {
+  color: var(--text-primary);
+}
+
+.dark .form-group input,
+.dark .form-group textarea {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.dark .form-actions {
+  border-top-color: var(--border-color);
+}
+
+.dark .profile-info h2 {
+  color: var(--text-primary);
+}
+
+.dark .profile-email {
+  color: var(--text-secondary);
+}

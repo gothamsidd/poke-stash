@@ -1,0 +1,54 @@
+.dark .checkout-page {
+  background: var(--bg-primary);
+}
+
+.dark .checkout-page h1 {
+  color: var(--text-primary);
+}
+
+.dark .checkout-form {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .checkout-form h2 {
+  color: var(--text-primary);
+}
+
+.dark .order-summary {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.dark .order-summary h2 {
+  color: var(--text-primary);
+}
+
+.dark .order-item {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.dark .total-row {
+  color: var(--text-secondary);
+}
+
+.dark .total-row.final {
+  color: var(--text-primary);
+  border-top-color: var(--border-color);
+}
+
+.dark .coupon-section {
+  border-bottom-color: var(--border-color);
+}
+
+.dark .coupon-input {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.dark .coupon-applied {
+  background: rgba(76, 175, 80, 0.1);
+  border-color: #4caf50;
+}
