@@ -68,6 +68,24 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/ecommerce
 .then(() => console.log('✅ MongoDB Connected'))
 .catch((err) => console.error('❌ MongoDB Connection Error:', err));
 
+// Root endpoint for Railway health checks (MUST be before API routes)
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'PokeStash API is running',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Health Check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'E-commerce API is running',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
@@ -77,24 +95,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/pokemon', pokemonRoutes);
 app.use('/api/coupons', couponRoutes);
-
-// Health Check - Railway needs this
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    message: 'E-commerce API is running',
-    timestamp: new Date().toISOString()
-  });
-});
-
-// Root endpoint for Railway health checks
-app.get('/', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    message: 'PokeStash API is running',
-    timestamp: new Date().toISOString()
-  });
-});
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
