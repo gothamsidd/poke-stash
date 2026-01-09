@@ -26,8 +26,26 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:3000',
+  'http://localhost:3001'
+].filter(Boolean); // Remove undefined values
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, or Railway health checks)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
+      callback(null, true);
+    } else {
+      // In production, allow Railway's internal health checks
+      if (process.env.NODE_ENV === 'production' && origin.includes('railway')) {
+        return callback(null, true);
+      }
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
@@ -60,11 +78,20 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/pokemon', pokemonRoutes);
 app.use('/api/coupons', couponRoutes);
 
-// Health Check
+// Health Check - Railway needs this
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     message: 'E-commerce API is running',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Root endpoint for Railway health checks
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'PokeStash API is running',
     timestamp: new Date().toISOString()
   });
 });
@@ -89,7 +116,7 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 5001;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
   
@@ -101,3 +128,14 @@ app.listen(PORT, () => {
   }
 });
 
+// Handle graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM signal received: closing HTTP server');
+  server.close(() => {
+    console.log('HTTP server closed');
+    mongoose.connection.close(false, () => {
+      console.log('MongoDB connection closed');
+      process.exit(0);
+    });
+  });
+});
