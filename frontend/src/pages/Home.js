@@ -14,6 +14,7 @@ const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [legendaryProducts, setLegendaryProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [statsLoading, setStatsLoading] = useState(true);
   const [stats, setStats] = useState({ total: 0, legendary: 0, generations: 0 });
 
   useEffect(() => {
@@ -22,49 +23,63 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      // Fetch featured products
-      const featuredRes = await axios.get(`${API_URL}/products?limit=8&sort=popular`);
+      // Fetch featured and legendary products in parallel
+      const [featuredRes, legendaryRes] = await Promise.all([
+        axios.get(`${API_URL}/products?limit=8&sort=popular`),
+        axios.get(`${API_URL}/products?limit=6&powerLevel=legendary`)
+      ]);
+      
       setFeaturedProducts(featuredRes.data.products || []);
-
-      // Fetch legendary products
-      const legendaryRes = await axios.get(`${API_URL}/products?limit=6&powerLevel=legendary`);
       setLegendaryProducts(legendaryRes.data.products || []);
 
-      // Get total products count
-      const totalRes = await axios.get(`${API_URL}/products?limit=1`);
-      const totalCount = totalRes.data?.total || 0;
-      
-      // Get legendary count
-      const legendaryCountRes = await axios.get(`${API_URL}/products?limit=1&powerLevel=legendary`);
-      const legendaryCount = legendaryCountRes.data?.total || 0;
-      
-      // Get unique generations count - fetch more products to get accurate count
-      const generationsRes = await axios.get(`${API_URL}/products?limit=1000`);
-      const uniqueGenerations = new Set();
-      if (generationsRes.data?.products && Array.isArray(generationsRes.data.products)) {
-        generationsRes.data.products.forEach(product => {
-          if (product.generation) {
-            uniqueGenerations.add(String(product.generation));
-          }
-        });
-      }
-      const generationsCount = uniqueGenerations.size > 0 ? uniqueGenerations.size : 9;
+      // Set loading to false early so products show immediately
+      setLoading(false);
 
-      setStats({
-        total: totalCount,
-        legendary: legendaryCount,
-        generations: generationsCount
+      // Fetch stats in parallel (non-blocking)
+      Promise.all([
+        axios.get(`${API_URL}/products?limit=1`),
+        axios.get(`${API_URL}/products?limit=1&powerLevel=legendary`),
+        axios.get(`${API_URL}/products?limit=200`) // Reduced from 1000 for faster loading
+      ]).then(([totalRes, legendaryCountRes, generationsRes]) => {
+        const totalCount = totalRes.data?.total || 0;
+        const legendaryCount = legendaryCountRes.data?.total || 0;
+        
+        // Get unique generations count from fetched products
+        const uniqueGenerations = new Set();
+        if (generationsRes.data?.products && Array.isArray(generationsRes.data.products)) {
+          generationsRes.data.products.forEach(product => {
+            if (product.generation) {
+              uniqueGenerations.add(String(product.generation));
+            }
+          });
+        }
+        const generationsCount = uniqueGenerations.size > 0 ? uniqueGenerations.size : 9;
+
+        setStats({
+          total: totalCount,
+          legendary: legendaryCount,
+          generations: generationsCount
+        });
+        setStatsLoading(false);
+      }).catch(error => {
+        console.error('Error fetching stats:', error);
+        // Set default values on error
+        setStats({
+          total: 0,
+          legendary: 0,
+          generations: 9
+        });
+        setStatsLoading(false);
       });
     } catch (error) {
       console.error('Error fetching data:', error);
-      console.error('Error details:', error.response?.data);
       // Set default values on error
       setStats({
         total: 0,
         legendary: 0,
         generations: 9
       });
-    } finally {
+      setStatsLoading(false);
       setLoading(false);
     }
   };
@@ -89,15 +104,15 @@ const Home = () => {
             </p>
             <div className="hero-stats">
               <div className="stat-item">
-                <span className="stat-number">{stats.total ? `${stats.total}+` : 'Loading...'}</span>
+                <span className="stat-number">{statsLoading ? '...' : (stats.total ? `${stats.total}+` : '0')}</span>
                 <span className="stat-label">Pokemon</span>
               </div>
               <div className="stat-item">
-                <span className="stat-number">{stats.legendary ? `${stats.legendary}+` : 'Loading...'}</span>
+                <span className="stat-number">{statsLoading ? '...' : (stats.legendary ? `${stats.legendary}+` : '0')}</span>
                 <span className="stat-label">Legendary</span>
               </div>
               <div className="stat-item">
-                <span className="stat-number">{stats.generations || 'Loading...'}</span>
+                <span className="stat-number">{statsLoading ? '...' : (stats.generations || '9')}</span>
                 <span className="stat-label">Generations</span>
               </div>
             </div>

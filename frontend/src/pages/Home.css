@@ -484,11 +484,13 @@
   .hero-actions {
     flex-direction: column;
     width: 100%;
+    align-items: center;
   }
 
   .btn-hero {
     width: 100%;
     max-width: 300px;
+    margin: 0 auto;
   }
 
   .section-header {

@@ -298,6 +298,9 @@
 
   .profile-dropdown {
     min-width: 250px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -316,11 +319,29 @@
 
   .user-menu {
     width: 100%;
+    display: flex;
     justify-content: center;
     border-left: none;
     border-top: 2px solid rgba(255, 255, 255, 0.3);
     padding-top: 12px;
     margin-top: 8px;
+  }
+
+  .user-avatar-container {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .profile-dropdown {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 280px;
+  }
+
+  .dropdown-item {
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .brand-name {
