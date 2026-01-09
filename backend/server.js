@@ -16,7 +16,6 @@ import productRoutes from './routes/product.routes.js';
 import orderRoutes from './routes/order.routes.js';
 import paymentRoutes from './routes/payment.routes.js';
 import userRoutes from './routes/user.routes.js';
-import aiRoutes from './routes/ai.routes.js';
 import pokemonRoutes from './routes/pokemon.routes.js';
 import couponRoutes from './routes/coupon.routes.js';
 
@@ -92,7 +91,6 @@ app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/ai', aiRoutes);
 app.use('/api/pokemon', pokemonRoutes);
 app.use('/api/coupons', couponRoutes);
 

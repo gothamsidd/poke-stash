@@ -289,11 +289,6 @@ const Home = () => {
               <h3>Advanced Filters</h3>
               <p>Filter by power level, HP, defense, stats, and more. Find exactly what you're looking for</p>
             </div>
-            <div className="feature-card">
-              <div className="feature-icon">🤖</div>
-              <h3>AI Recommendations</h3>
-              <p>Get personalized sticker recommendations powered by Google Gemini AI</p>
-            </div>
           </div>
         </div>
       </section>
