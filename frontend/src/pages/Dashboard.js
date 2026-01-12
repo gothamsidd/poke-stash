@@ -39,7 +39,7 @@ const Dashboard = () => {
     try {
       const [statsRes, productsRes] = await Promise.all([
         axios.get(`${API_URL}/users/dashboard`),
-        axios.get(`${API_URL}/products?seller=${user._id}&limit=1000&sort=${sortBy}`)
+        axios.get(`${API_URL}/products?seller=${user._id}&limit=50&sort=${sortBy}`)
       ]);
       setStats(statsRes.data.stats);
       setProducts(productsRes.data.products || []);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
@@ -28,6 +28,10 @@ const Checkout = () => {
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [couponError, setCouponError] = useState('');
   const [validatingCoupon, setValidatingCoupon] = useState(false);
+  
+  // Store poll interval reference for cleanup
+  const pollIntervalRef = useRef(null);
+  const isPaymentCompletedRef = useRef(false);
 
   const fetchCart = async () => {
     try {
@@ -190,6 +194,17 @@ const Checkout = () => {
 
       const razorpayOrder = paymentRes.data.order;
 
+      // Reset payment completed flag
+      isPaymentCompletedRef.current = false;
+
+      // Cleanup function to clear intervals
+      const cleanup = () => {
+        if (pollIntervalRef.current) {
+          clearInterval(pollIntervalRef.current);
+          pollIntervalRef.current = null;
+        }
+      };
+
       // Initialize Razorpay with ALL payment methods enabled
       const options = {
         key: razorpayKey,
@@ -201,6 +216,8 @@ const Checkout = () => {
         handler: async function (response) {
           try {
             // Payment handler called
+            isPaymentCompletedRef.current = true;
+            cleanup(); // Stop polling immediately
             
             // Verify payment
             const verifyRes = await axios.post(`${API_URL}/payments/verify`, {
@@ -295,9 +312,6 @@ const Checkout = () => {
       // Create and open Razorpay immediately
       const razorpay = new window.Razorpay(options);
       
-      // Store poll interval reference for cleanup
-      let pollInterval = null;
-      
       // Open payment modal immediately (non-blocking)
       razorpay.open();
       
@@ -310,10 +324,8 @@ const Checkout = () => {
         console.error('Payment failed response:', response);
         
         // Clear polling if active
-        if (pollInterval) {
-          clearInterval(pollInterval);
-          pollInterval = null;
-        }
+        cleanup();
+        isPaymentCompletedRef.current = true;
         
         // Handle QR code issues (common in test mode)
         if (errorMsg.toLowerCase().includes('qr') || errorMsg.toLowerCase().includes('qr code') || errorMsg.toLowerCase().includes('qr doesn\'t exist') || errorMsg.toLowerCase().includes('qr not found')) {
@@ -334,15 +346,19 @@ const Checkout = () => {
       
       // For QR code payments, poll for payment status after modal opens
       razorpay.on('modal.open', function() {
+        // Only start polling if payment not already completed
+        if (isPaymentCompletedRef.current) {
+          return;
+        }
+        
         // Razorpay modal opened - starting payment status polling
         let pollCount = 0;
-        const maxPolls = 120; // Poll for 10 minutes (120 * 5 seconds)
+        const maxPolls = 60; // Reduced from 120 to 60 (5 minutes instead of 10)
         
-        pollInterval = setInterval(async () => {
-          if (pollCount >= maxPolls) {
-            // Polling timeout reached
-            clearInterval(pollInterval);
-            pollInterval = null;
+        pollIntervalRef.current = setInterval(async () => {
+          // Stop if payment already completed or max polls reached
+          if (isPaymentCompletedRef.current || pollCount >= maxPolls) {
+            cleanup();
             return;
           }
           
@@ -352,14 +368,15 @@ const Checkout = () => {
             
             if (statusRes.data.success && statusRes.data.status === 'completed') {
               // Payment completed
-              clearInterval(pollInterval);
-              pollInterval = null;
+              isPaymentCompletedRef.current = true;
+              cleanup();
               success('Payment completed! Order placed successfully.');
               navigate('/orders', { state: { success: true } });
+              return;
             }
           } catch (error) {
             console.error('❌ Error checking payment status:', error);
-            // Don't stop polling on error, might be temporary
+            // Continue polling on error, might be temporary
           }
           
           pollCount++;
@@ -368,10 +385,7 @@ const Checkout = () => {
       
       // Clear interval when modal closes
       razorpay.on('modal.close', function() {
-        if (pollInterval) {
-          clearInterval(pollInterval);
-          pollInterval = null;
-        }
+        cleanup();
       });
       
       // Open payment modal immediately - this is non-blocking
