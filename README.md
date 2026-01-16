@@ -100,14 +100,19 @@ The app should be running on `http://localhost:3000`.
 
 ## Default accounts
 
-After seeding the database, you'll have a default seller/admin account:
+After seeding the database, you'll have default accounts for testing:
 
 **Seller Account:**
 - **Email:** `admin@pokestash.com`
 - **Password:** `admin123`
 - **Role:** Seller (can create and manage products)
 
-**Note:** You can create customer accounts through the registration page. Customer accounts can browse products, add to cart, and make purchases.
+**Customer Account:**
+- **Email:** `customer@pokestash.com`
+- **Password:** `customer123`
+- **Role:** Customer (can browse products, add to cart, and make purchases)
+
+**Note:** You can also create additional accounts through the registration page.
 
 ## Project structure
 
