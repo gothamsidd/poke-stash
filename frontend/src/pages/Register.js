@@ -156,7 +156,7 @@ const Register = () => {
           </div>
           
           <a 
-            href={`${process.env.REACT_APP_API_URL || 'http://localhost:5001/api'}/auth/google?role=${oauthRole}`}
+            href={`${process.env.REACT_APP_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5001/api' : '/api')}/auth/google?role=${oauthRole}`}
             className="btn-google"
             style={{
               display: 'flex',

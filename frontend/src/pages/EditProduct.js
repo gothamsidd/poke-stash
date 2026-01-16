@@ -3,12 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { ToastContext } from '../context/ToastContext';
+import { API_URL } from '../utils/apiConfig';
 import PokemonSearch from '../components/PokemonSearch';
 import { getImageUrl } from '../utils/imageHelper';
 import './AddProduct.css';
 import './DarkModeAddProduct.css';
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const EditProduct = () => {
   const { id } = useParams();

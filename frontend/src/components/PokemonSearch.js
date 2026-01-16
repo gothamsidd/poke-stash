@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { API_URL } from '../utils/apiConfig';
 import './PokemonSearch.css';
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const PokemonSearch = ({ onSelectPokemon, selectedPokemon }) => {
   const [searchQuery, setSearchQuery] = useState('');

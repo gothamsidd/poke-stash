@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { API_URL } from '../utils/apiConfig';
 import { getImageUrl } from '../utils/imageHelper';
 import './Home.css';
 import './DarkMode.css';
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const Home = () => {
   const { user } = useContext(AuthContext);

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../utils/apiConfig';
 import { getImageUrl } from '../utils/imageHelper';
 import { ProductCardSkeleton } from '../components/LoadingSkeleton';
 import SearchAutocomplete from '../components/SearchAutocomplete';
 import './Products.css';
 import './DarkModeProducts.css';
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const Products = () => {
   const [products, setProducts] = useState([]);

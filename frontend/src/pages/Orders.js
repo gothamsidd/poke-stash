@@ -3,10 +3,9 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { ToastContext } from '../context/ToastContext';
+import { API_URL } from '../utils/apiConfig';
 import { getImageUrl } from '../utils/imageHelper';
 import './Orders.css';
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const Orders = () => {
   const { user } = useContext(AuthContext);

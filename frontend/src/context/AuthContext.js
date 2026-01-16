@@ -1,9 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../utils/apiConfig';
 
 export const AuthContext = createContext();
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -44,6 +43,21 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
+      // Handle network errors
+      if (!error.response) {
+        const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+        if (isProduction && !process.env.REACT_APP_API_URL) {
+          return {
+            success: false,
+            message: 'API not configured. Please set REACT_APP_API_URL in Vercel environment variables.'
+          };
+        }
+        return {
+          success: false,
+          message: 'Network Error: Unable to connect to server. Please check your connection and try again.'
+        };
+      }
+      
       // Handle validation errors (array format)
       if (error.response?.data?.errors && Array.isArray(error.response.data.errors)) {
         const errorMessages = error.response.data.errors.map(err => err.msg || err.message).join(', ');
