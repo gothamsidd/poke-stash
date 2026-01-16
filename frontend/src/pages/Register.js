@@ -190,18 +190,18 @@ const Register = () => {
         </p>
         
         {/* Default Accounts Info */}
-        <div style={{
+        <div className="test-accounts-box" style={{
           marginTop: '30px',
           padding: '20px',
-          background: darkMode ? '#2d3748' : '#f8f9fa',
+          background: 'var(--card-bg)',
           borderRadius: '8px',
-          border: `1px solid ${darkMode ? '#4a5568' : '#e0e0e0'}`,
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          border: '1px solid var(--border-color)',
+          boxShadow: 'var(--shadow)'
         }}>
           <h3 style={{ 
             margin: '0 0 15px 0', 
             fontSize: '16px', 
-            color: darkMode ? '#e2e8f0' : '#2c3e50',
+            color: 'var(--text-primary)',
             fontWeight: '600'
           }}>
             🧪 Test Accounts
@@ -209,20 +209,20 @@ const Register = () => {
           <p style={{ 
             margin: '0 0 15px 0', 
             fontSize: '13px', 
-            color: darkMode ? '#cbd5e0' : '#7f8c8d',
+            color: 'var(--text-secondary)',
             lineHeight: '1.5'
           }}>
             Use these default accounts for testing (available after seeding):
           </p>
           <div style={{ fontSize: '13px' }}>
             <div style={{ marginBottom: '15px' }}>
-              <strong style={{ color: '#667eea' }}>Seller Account:</strong>
-              <div style={{ marginLeft: '10px', marginTop: '6px', color: darkMode ? '#cbd5e0' : '#555' }}>
+              <strong style={{ color: 'var(--accent-color)' }}>Seller Account:</strong>
+              <div style={{ marginLeft: '10px', marginTop: '6px', color: 'var(--text-secondary)' }}>
                 Email: <code style={{ 
-                  background: darkMode ? '#1a202c' : '#fff', 
+                  background: 'var(--bg-primary)', 
                   padding: '3px 8px', 
                   borderRadius: '4px',
-                  color: darkMode ? '#e2e8f0' : '#333',
+                  color: 'var(--text-primary)',
                   fontFamily: 'monospace',
                   fontSize: '12px'
                 }}>admin@pokestash.com</code>
@@ -234,36 +234,39 @@ const Register = () => {
                   style={{
                     marginLeft: '8px',
                     padding: '4px 10px',
-                    background: '#667eea',
+                    background: 'var(--accent-color)',
                     color: 'white',
                     border: 'none',
                     borderRadius: '4px',
                     cursor: 'pointer',
                     fontSize: '11px',
-                    fontWeight: '500'
+                    fontWeight: '500',
+                    transition: 'all 0.3s'
                   }}
+                  onMouseEnter={(e) => e.target.style.background = 'var(--accent-hover)'}
+                  onMouseLeave={(e) => e.target.style.background = 'var(--accent-color)'}
                 >
                   Fill
                 </button>
                 <br style={{ marginBottom: '4px' }} />
                 Password: <code style={{ 
-                  background: darkMode ? '#1a202c' : '#fff', 
+                  background: 'var(--bg-primary)', 
                   padding: '3px 8px', 
                   borderRadius: '4px',
-                  color: darkMode ? '#e2e8f0' : '#333',
+                  color: 'var(--text-primary)',
                   fontFamily: 'monospace',
                   fontSize: '12px'
                 }}>admin123</code>
               </div>
             </div>
             <div>
-              <strong style={{ color: '#667eea' }}>Customer Account:</strong>
-              <div style={{ marginLeft: '10px', marginTop: '6px', color: darkMode ? '#cbd5e0' : '#555' }}>
+              <strong style={{ color: 'var(--accent-color)' }}>Customer Account:</strong>
+              <div style={{ marginLeft: '10px', marginTop: '6px', color: 'var(--text-secondary)' }}>
                 Email: <code style={{ 
-                  background: darkMode ? '#1a202c' : '#fff', 
+                  background: 'var(--bg-primary)', 
                   padding: '3px 8px', 
                   borderRadius: '4px',
-                  color: darkMode ? '#e2e8f0' : '#333',
+                  color: 'var(--text-primary)',
                   fontFamily: 'monospace',
                   fontSize: '12px'
                 }}>customer@pokestash.com</code>
@@ -275,23 +278,26 @@ const Register = () => {
                   style={{
                     marginLeft: '8px',
                     padding: '4px 10px',
-                    background: '#667eea',
+                    background: 'var(--accent-color)',
                     color: 'white',
                     border: 'none',
                     borderRadius: '4px',
                     cursor: 'pointer',
                     fontSize: '11px',
-                    fontWeight: '500'
+                    fontWeight: '500',
+                    transition: 'all 0.3s'
                   }}
+                  onMouseEnter={(e) => e.target.style.background = 'var(--accent-hover)'}
+                  onMouseLeave={(e) => e.target.style.background = 'var(--accent-color)'}
                 >
                   Fill
                 </button>
                 <br style={{ marginBottom: '4px' }} />
                 Password: <code style={{ 
-                  background: darkMode ? '#1a202c' : '#fff', 
+                  background: 'var(--bg-primary)', 
                   padding: '3px 8px', 
                   borderRadius: '4px',
-                  color: darkMode ? '#e2e8f0' : '#333',
+                  color: 'var(--text-primary)',
                   fontFamily: 'monospace',
                   fontSize: '12px'
                 }}>customer123</code>
