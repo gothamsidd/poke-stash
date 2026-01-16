@@ -112,19 +112,20 @@ After seeding the database, you'll have a default seller/admin account:
 ## Project structure
 
 ```
-mansi/
+poke-stash/
 ├── backend/
 │   ├── models/          # MongoDB schemas
 │   ├── routes/          # API endpoints
 │   ├── middleware/      # Auth middleware
-│   ├── scripts/        # Database seeding scripts
+│   ├── scripts/         # Database seeding scripts
+│   ├── utils/           # Utility functions
 │   └── server.js        # Express server
 ├── frontend/
 │   ├── src/
 │   │   ├── components/  # Reusable components
 │   │   ├── pages/       # Page components
 │   │   ├── context/     # React contexts
-│   │   └── utils/      # Helper functions
+│   │   └── utils/       # Helper functions
 │   └── public/
 └── README.md
 ```
