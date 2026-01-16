@@ -138,8 +138,8 @@ const server = app.listen(PORT, '0.0.0.0', () => {
 });
 
 // Handle graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server');
+const gracefulShutdown = (signal) => {
+  console.log(`${signal} signal received: closing HTTP server`);
   server.close(() => {
     console.log('HTTP server closed');
     mongoose.connection.close(false, () => {
@@ -147,4 +147,7 @@ process.on('SIGTERM', () => {
       process.exit(0);
     });
   });
-});
+};
+
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
