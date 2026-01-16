@@ -83,6 +83,7 @@ app.get('/', (req, res) => {
   res.json({ 
     status: 'OK', 
     message: 'PokeStash API is running',
+    version: '1.0.0',
     timestamp: new Date().toISOString()
   });
 });
