@@ -33,4 +33,6 @@
     ]
   },
     "proxy": "http://localhost:5001"
+  },
+  "description": "Frontend for PokeStash - Pokemon sticker e-commerce platform"
 }
