@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { ToastContext } from '../context/ToastContext';
+import { ThemeContext } from '../context/ThemeContext';
 import './Auth.css';
 import './DarkModeAuth.css';
 
@@ -11,6 +12,7 @@ const Login = () => {
   const [oauthRole, setOauthRole] = useState('customer');
   const { login } = useContext(AuthContext);
   const { success, error: showError } = useContext(ToastContext);
+  const { isDark } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -131,6 +133,68 @@ const Login = () => {
         <p className="auth-link">
           Don't have an account? <Link to="/register">Sign up</Link>
         </p>
+        
+        {/* Default Accounts Info */}
+        <div style={{
+          marginTop: '30px',
+          padding: '20px',
+          background: isDark ? 'var(--card-bg)' : '#f8f9fa',
+          borderRadius: '8px',
+          border: `1px solid ${isDark ? 'var(--border-color)' : '#e0e0e0'}`
+        }}>
+          <h3 style={{ 
+            margin: '0 0 15px 0', 
+            fontSize: '16px', 
+            color: isDark ? 'var(--text-primary)' : '#2c3e50',
+            fontWeight: '600'
+          }}>
+            🧪 Test Accounts
+          </h3>
+          <p style={{ 
+            margin: '0 0 12px 0', 
+            fontSize: '13px', 
+            color: isDark ? 'var(--text-secondary)' : '#7f8c8d',
+            lineHeight: '1.5'
+          }}>
+            Use these default accounts for testing (available after seeding):
+          </p>
+          <div style={{ fontSize: '13px' }}>
+            <div style={{ marginBottom: '10px' }}>
+              <strong style={{ color: '#667eea' }}>Seller Account:</strong>
+              <div style={{ marginLeft: '10px', marginTop: '4px', color: isDark ? 'var(--text-secondary)' : '#555' }}>
+                Email: <code style={{ 
+                  background: isDark ? 'var(--bg-primary)' : '#fff', 
+                  padding: '2px 6px', 
+                  borderRadius: '3px',
+                  color: isDark ? 'var(--text-primary)' : '#333'
+                }}>admin@pokestash.com</code><br/>
+                Password: <code style={{ 
+                  background: isDark ? 'var(--bg-primary)' : '#fff', 
+                  padding: '2px 6px', 
+                  borderRadius: '3px',
+                  color: isDark ? 'var(--text-primary)' : '#333'
+                }}>admin123</code>
+              </div>
+            </div>
+            <div>
+              <strong style={{ color: '#667eea' }}>Customer Account:</strong>
+              <div style={{ marginLeft: '10px', marginTop: '4px', color: isDark ? 'var(--text-secondary)' : '#555' }}>
+                Email: <code style={{ 
+                  background: isDark ? 'var(--bg-primary)' : '#fff', 
+                  padding: '2px 6px', 
+                  borderRadius: '3px',
+                  color: isDark ? 'var(--text-primary)' : '#333'
+                }}>customer@pokestash.com</code><br/>
+                Password: <code style={{ 
+                  background: isDark ? 'var(--bg-primary)' : '#fff', 
+                  padding: '2px 6px', 
+                  borderRadius: '3px',
+                  color: isDark ? 'var(--text-primary)' : '#333'
+                }}>customer123</code>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
