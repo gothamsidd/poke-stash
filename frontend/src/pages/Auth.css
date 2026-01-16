@@ -50,3 +50,9 @@
 .auth-link a:hover {
   color: #5568d3;
 }
+
+.fill-btn:hover {
+  background: var(--accent-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}

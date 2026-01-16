@@ -176,6 +176,7 @@ const Login = () => {
                   onClick={() => {
                     setFormData({ email: 'admin@pokestash.com', password: 'admin123' });
                   }}
+                  className="fill-btn"
                   style={{
                     marginLeft: '8px',
                     padding: '4px 10px',
@@ -188,8 +189,6 @@ const Login = () => {
                     fontWeight: '500',
                     transition: 'all 0.3s'
                   }}
-                  onMouseEnter={(e) => e.target.style.background = 'var(--accent-hover)'}
-                  onMouseLeave={(e) => e.target.style.background = 'var(--accent-color)'}
                 >
                   Fill
                 </button>
@@ -220,6 +219,7 @@ const Login = () => {
                   onClick={() => {
                     setFormData({ email: 'customer@pokestash.com', password: 'customer123' });
                   }}
+                  className="fill-btn"
                   style={{
                     marginLeft: '8px',
                     padding: '4px 10px',
@@ -232,8 +232,6 @@ const Login = () => {
                     fontWeight: '500',
                     transition: 'all 0.3s'
                   }}
-                  onMouseEnter={(e) => e.target.style.background = 'var(--accent-hover)'}
-                  onMouseLeave={(e) => e.target.style.background = 'var(--accent-color)'}
                 >
                   Fill
                 </button>

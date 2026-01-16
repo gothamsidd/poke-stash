@@ -231,6 +231,7 @@ const Register = () => {
                   onClick={() => {
                     setFormData({ ...formData, email: 'admin@pokestash.com', password: 'admin123', confirmPassword: 'admin123', role: 'seller' });
                   }}
+                  className="fill-btn"
                   style={{
                     marginLeft: '8px',
                     padding: '4px 10px',
@@ -243,8 +244,6 @@ const Register = () => {
                     fontWeight: '500',
                     transition: 'all 0.3s'
                   }}
-                  onMouseEnter={(e) => e.target.style.background = 'var(--accent-hover)'}
-                  onMouseLeave={(e) => e.target.style.background = 'var(--accent-color)'}
                 >
                   Fill
                 </button>
@@ -275,6 +274,7 @@ const Register = () => {
                   onClick={() => {
                     setFormData({ ...formData, email: 'customer@pokestash.com', password: 'customer123', confirmPassword: 'customer123', role: 'customer' });
                   }}
+                  className="fill-btn"
                   style={{
                     marginLeft: '8px',
                     padding: '4px 10px',
@@ -287,8 +287,6 @@ const Register = () => {
                     fontWeight: '500',
                     transition: 'all 0.3s'
                   }}
-                  onMouseEnter={(e) => e.target.style.background = 'var(--accent-hover)'}
-                  onMouseLeave={(e) => e.target.style.background = 'var(--accent-color)'}
                 >
                   Fill
                 </button>
