@@ -33,13 +33,14 @@ const Home = () => {
       // Set loading to false early so products show immediately
       setLoading(false);
 
-      // Fetch stats efficiently - only get totals, not all products
+      // Fetch stats efficiently - get total counts
       Promise.all([
         axios.get(`${API_URL}/products?limit=1`),
         axios.get(`${API_URL}/products?limit=1&powerLevel=legendary`)
       ]).then(([totalRes, legendaryCountRes]) => {
-        const totalCount = totalRes.data?.total || 0;
-        const legendaryCount = legendaryCountRes.data?.total || 0;
+        // API returns { success: true, total: number, products: [...] }
+        const totalCount = totalRes.data?.total ?? 0;
+        const legendaryCount = legendaryCountRes.data?.total ?? 0;
         
         // Use a reasonable default for generations (most Pokemon sites have 9)
         const generationsCount = 9;
