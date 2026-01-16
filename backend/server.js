@@ -24,7 +24,8 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Middleware
+// CORS Configuration
+// Configure allowed origins for cross-origin requests
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   'http://localhost:3000',
