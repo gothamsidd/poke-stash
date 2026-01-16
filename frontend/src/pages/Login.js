@@ -138,58 +138,107 @@ const Login = () => {
         <div style={{
           marginTop: '30px',
           padding: '20px',
-          background: darkMode ? 'var(--card-bg)' : '#f8f9fa',
+          background: darkMode ? '#2d3748' : '#f8f9fa',
           borderRadius: '8px',
-          border: `1px solid ${darkMode ? 'var(--border-color)' : '#e0e0e0'}`
+          border: `1px solid ${darkMode ? '#4a5568' : '#e0e0e0'}`,
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
         }}>
           <h3 style={{ 
             margin: '0 0 15px 0', 
             fontSize: '16px', 
-            color: darkMode ? 'var(--text-primary)' : '#2c3e50',
+            color: darkMode ? '#e2e8f0' : '#2c3e50',
             fontWeight: '600'
           }}>
             🧪 Test Accounts
           </h3>
           <p style={{ 
-            margin: '0 0 12px 0', 
+            margin: '0 0 15px 0', 
             fontSize: '13px', 
-            color: darkMode ? 'var(--text-secondary)' : '#7f8c8d',
+            color: darkMode ? '#cbd5e0' : '#7f8c8d',
             lineHeight: '1.5'
           }}>
             Use these default accounts for testing (available after seeding):
           </p>
           <div style={{ fontSize: '13px' }}>
-            <div style={{ marginBottom: '10px' }}>
+            <div style={{ marginBottom: '15px' }}>
               <strong style={{ color: '#667eea' }}>Seller Account:</strong>
-              <div style={{ marginLeft: '10px', marginTop: '4px', color: darkMode ? 'var(--text-secondary)' : '#555' }}>
+              <div style={{ marginLeft: '10px', marginTop: '6px', color: darkMode ? '#cbd5e0' : '#555' }}>
                 Email: <code style={{ 
-                  background: darkMode ? 'var(--bg-primary)' : '#fff', 
-                  padding: '2px 6px', 
-                  borderRadius: '3px',
-                  color: darkMode ? 'var(--text-primary)' : '#333'
-                }}>admin@pokestash.com</code><br/>
+                  background: darkMode ? '#1a202c' : '#fff', 
+                  padding: '3px 8px', 
+                  borderRadius: '4px',
+                  color: darkMode ? '#e2e8f0' : '#333',
+                  fontFamily: 'monospace',
+                  fontSize: '12px'
+                }}>admin@pokestash.com</code>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFormData({ email: 'admin@pokestash.com', password: 'admin123' });
+                  }}
+                  style={{
+                    marginLeft: '8px',
+                    padding: '4px 10px',
+                    background: '#667eea',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontSize: '11px',
+                    fontWeight: '500'
+                  }}
+                >
+                  Fill
+                </button>
+                <br style={{ marginBottom: '4px' }} />
                 Password: <code style={{ 
-                  background: darkMode ? 'var(--bg-primary)' : '#fff', 
-                  padding: '2px 6px', 
-                  borderRadius: '3px',
-                  color: darkMode ? 'var(--text-primary)' : '#333'
+                  background: darkMode ? '#1a202c' : '#fff', 
+                  padding: '3px 8px', 
+                  borderRadius: '4px',
+                  color: darkMode ? '#e2e8f0' : '#333',
+                  fontFamily: 'monospace',
+                  fontSize: '12px'
                 }}>admin123</code>
               </div>
             </div>
             <div>
               <strong style={{ color: '#667eea' }}>Customer Account:</strong>
-              <div style={{ marginLeft: '10px', marginTop: '4px', color: darkMode ? 'var(--text-secondary)' : '#555' }}>
+              <div style={{ marginLeft: '10px', marginTop: '6px', color: darkMode ? '#cbd5e0' : '#555' }}>
                 Email: <code style={{ 
-                  background: darkMode ? 'var(--bg-primary)' : '#fff', 
-                  padding: '2px 6px', 
-                  borderRadius: '3px',
-                  color: darkMode ? 'var(--text-primary)' : '#333'
-                }}>customer@pokestash.com</code><br/>
+                  background: darkMode ? '#1a202c' : '#fff', 
+                  padding: '3px 8px', 
+                  borderRadius: '4px',
+                  color: darkMode ? '#e2e8f0' : '#333',
+                  fontFamily: 'monospace',
+                  fontSize: '12px'
+                }}>customer@pokestash.com</code>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFormData({ email: 'customer@pokestash.com', password: 'customer123' });
+                  }}
+                  style={{
+                    marginLeft: '8px',
+                    padding: '4px 10px',
+                    background: '#667eea',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontSize: '11px',
+                    fontWeight: '500'
+                  }}
+                >
+                  Fill
+                </button>
+                <br style={{ marginBottom: '4px' }} />
                 Password: <code style={{ 
-                  background: darkMode ? 'var(--bg-primary)' : '#fff', 
-                  padding: '2px 6px', 
-                  borderRadius: '3px',
-                  color: darkMode ? 'var(--text-primary)' : '#333'
+                  background: darkMode ? '#1a202c' : '#fff', 
+                  padding: '3px 8px', 
+                  borderRadius: '4px',
+                  color: darkMode ? '#e2e8f0' : '#333',
+                  fontFamily: 'monospace',
+                  fontSize: '12px'
                 }}>customer123</code>
               </div>
             </div>
