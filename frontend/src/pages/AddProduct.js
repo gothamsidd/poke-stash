@@ -11,7 +11,6 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
-  const { success, error: showError } = useContext(ToastContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',

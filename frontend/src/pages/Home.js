@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { getImageUrl } from '../utils/imageHelper';
-import { StatCardSkeleton } from '../components/LoadingSkeleton';
 import './Home.css';
 import './DarkMode.css';
 

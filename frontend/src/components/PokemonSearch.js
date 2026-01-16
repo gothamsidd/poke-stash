@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { getImageUrl } from '../utils/imageHelper';
 import './PokemonSearch.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
@@ -12,18 +11,7 @@ const PokemonSearch = ({ onSelectPokemon, selectedPokemon }) => {
   const [selected, setSelected] = useState(selectedPokemon || null);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  useEffect(() => {
-    if (searchQuery.length > 2) {
-      const timeoutId = setTimeout(() => {
-        searchPokemon();
-      }, 300);
-      return () => clearTimeout(timeoutId);
-    } else {
-      setResults([]);
-    }
-  }, [searchQuery]);
-
-  const searchPokemon = async () => {
+  const searchPokemon = useCallback(async () => {
     setLoading(true);
     try {
       const res = await axios.get(`${API_URL}/pokemon/search?q=${searchQuery}&limit=10`);
@@ -35,7 +23,18 @@ const PokemonSearch = ({ onSelectPokemon, selectedPokemon }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (searchQuery.length > 2) {
+      const timeoutId = setTimeout(() => {
+        searchPokemon();
+      }, 300);
+      return () => clearTimeout(timeoutId);
+    } else {
+      setResults([]);
+    }
+  }, [searchQuery, searchPokemon]);
 
   const handleSelect = (pokemon) => {
     setSelected(pokemon);
