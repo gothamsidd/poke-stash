@@ -213,49 +213,6 @@ const Register = () => {
             Use these default accounts for testing (available after seeding):
           </p>
           <div style={{ fontSize: '13px' }}>
-            <div style={{ marginBottom: '15px' }}>
-              <strong style={{ color: 'var(--accent-color)' }}>Seller Account:</strong>
-              <div style={{ marginLeft: '10px', marginTop: '6px', color: 'var(--text-secondary)' }}>
-                Email: <code style={{ 
-                  background: 'var(--bg-primary)', 
-                  padding: '3px 8px', 
-                  borderRadius: '4px',
-                  color: 'var(--text-primary)',
-                  fontFamily: 'monospace',
-                  fontSize: '12px'
-                }}>admin@pokestash.com</code>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFormData({ ...formData, email: 'admin@pokestash.com', password: 'admin123', confirmPassword: 'admin123', role: 'seller' });
-                  }}
-                  className="fill-btn"
-                  style={{
-                    marginLeft: '8px',
-                    padding: '4px 10px',
-                    background: 'var(--accent-color)',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    fontSize: '11px',
-                    fontWeight: '500',
-                    transition: 'all 0.3s'
-                  }}
-                >
-                  Fill
-                </button>
-                <br style={{ marginBottom: '4px' }} />
-                Password: <code style={{ 
-                  background: 'var(--bg-primary)', 
-                  padding: '3px 8px', 
-                  borderRadius: '4px',
-                  color: 'var(--text-primary)',
-                  fontFamily: 'monospace',
-                  fontSize: '12px'
-                }}>admin123</code>
-              </div>
-            </div>
             <div>
               <strong style={{ color: 'var(--accent-color)' }}>Customer Account:</strong>
               <div style={{ marginLeft: '10px', marginTop: '6px', color: 'var(--text-secondary)' }}>

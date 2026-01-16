@@ -389,20 +389,20 @@ const seedPokemon = async () => {
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/pokemon_stickers');
     console.log('✅ Connected to MongoDB');
 
-    // Get or create admin/seller user
+    // Get or create default seller user (if needed for products)
     let seller = await User.findOne({ role: 'seller' });
     if (!seller) {
       seller = await User.findOne({ role: 'admin' });
     }
     if (!seller) {
-      // Create a default seller
+      // Create a default seller for products (no default credentials provided)
       seller = await User.create({
-        name: 'Pokemon Store Admin',
-        email: 'admin@pokestash.com',
-        password: 'admin123',
+        name: 'Pokemon Store',
+        email: `seller-${Date.now()}@pokestash.com`,
+        password: require('crypto').randomBytes(16).toString('hex'),
         role: 'seller'
       });
-      console.log('✅ Created default seller account');
+      console.log('✅ Created default seller account for products');
     }
 
     // Get or create default customer user
