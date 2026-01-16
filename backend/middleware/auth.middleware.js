@@ -29,6 +29,10 @@ export const protect = async (req, res, next) => {
 
       next();
     } catch (error) {
+      // Log error for debugging in development
+      if (process.env.NODE_ENV === 'development') {
+        console.error('JWT verification error:', error.message);
+      }
       return res.status(401).json({
         success: false,
         message: 'Not authorized to access this route'
