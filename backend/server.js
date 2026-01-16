@@ -78,6 +78,16 @@ mongoose.connect(mongoURI)
     process.exit(1);
   });
 
+// Health Check endpoint - MUST be early for Railway health checks
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'PokeStash API is running',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
 // Root endpoint for Railway health checks (MUST be before API routes)
 app.get('/', (req, res) => {
   res.json({ 
@@ -85,16 +95,6 @@ app.get('/', (req, res) => {
     message: 'PokeStash API is running',
     version: '1.0.0',
     timestamp: new Date().toISOString()
-  });
-});
-
-// Health Check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    message: 'PokeStash API is running',
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime()
   });
 });
 
