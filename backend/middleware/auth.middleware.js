@@ -53,6 +53,11 @@ export const protect = async (req, res, next) => {
   }
 };
 
+/**
+ * Middleware to authorize routes based on user roles
+ * @param {...string} roles - Allowed roles for the route
+ * @returns {Function} Express middleware function
+ */
 export const authorize = (...roles) => {
   return (req, res, next) => {
     if (!req.user) {
