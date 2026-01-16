@@ -28,19 +28,19 @@ function App() {
             <div className="App">
               <Navbar />
               <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/products/new" element={<AddProduct />} />
-            <Route path="/products/:id/edit" element={<EditProduct />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/auth/callback" element={<AuthCallback />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/products/:id" element={<ProductDetail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/products/new" element={<AddProduct />} />
+                <Route path="/products/:id/edit" element={<EditProduct />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/auth/callback" element={<AuthCallback />} />
               </Routes>
             </div>
           </Router>
