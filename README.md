@@ -32,7 +32,7 @@ You'll need Node.js installed (v16 or higher works fine). Also need a MongoDB da
 1. Clone the repo:
 ```bash
 git clone <your-repo-url>
-cd mansi
+cd poke-stash
 ```
 
 2. Install dependencies:
@@ -100,11 +100,14 @@ The app should be running on `http://localhost:3000`.
 
 ## Default accounts
 
-After seeding, you'll have a default seller account:
-- Email: `admin@pokestash.com`
-- Password: `admin123`
+After seeding the database, you'll have a default seller/admin account:
 
-You can create customer accounts through the registration page.
+**Seller Account:**
+- **Email:** `admin@pokestash.com`
+- **Password:** `admin123`
+- **Role:** Seller (can create and manage products)
+
+**Note:** You can create customer accounts through the registration page. Customer accounts can browse products, add to cart, and make purchases.
 
 ## Project structure
 
