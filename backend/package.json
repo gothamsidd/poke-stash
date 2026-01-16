@@ -1,7 +1,7 @@
 {
   "name": "ecommerce-backend",
   "version": "1.0.0",
-  "description": "Backend for e-commerce platform",
+  "description": "Backend for PokeStash - Pokemon sticker e-commerce platform",
   "main": "server.js",
   "type": "module",
   "scripts": {
