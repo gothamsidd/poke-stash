@@ -26,12 +26,25 @@
 }
 
 .btn-primary {
-  background: #667eea;
+  background: var(--accent-color);
   color: white;
+  transition: all 0.3s;
 }
 
 .btn-primary:hover {
-  background: #5568d3;
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.dark .btn-primary {
+  background: var(--accent-color);
+  box-shadow: 0 4px 12px rgba(129, 140, 248, 0.3);
+}
+
+.dark .btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 6px 20px rgba(129, 140, 248, 0.4);
 }
 
 .btn-secondary {
@@ -59,10 +72,23 @@
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid #e0e0e0;
+  transition: all 0.3s;
 }
 
 .card:hover {
   border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.dark .card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dark .card:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 24px rgba(129, 140, 248, 0.2);
 }
 
 .form-group {
@@ -87,6 +113,7 @@
   font-size: 16px;
   font-family: inherit;
   background: white;
+  transition: all 0.3s;
 }
 
 .form-group input:focus,
@@ -94,6 +121,22 @@
 .form-group select:focus {
   border-color: #667eea;
   outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.dark .form-group input,
+.dark .form-group textarea,
+.dark .form-group select {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.dark .form-group input:focus,
+.dark .form-group textarea:focus,
+.dark .form-group select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
 }
 
 .grid {
@@ -155,6 +198,12 @@
   font-weight: 500;
 }
 
+.dark .error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  border-left-color: #ef4444;
+}
+
 .success {
   background: #efe;
   color: #2e7d32;
@@ -163,6 +212,12 @@
   margin: 20px 0;
   border-left: 4px solid #4caf50;
   font-weight: 500;
+}
+
+.dark .success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #86efac;
+  border-left-color: #22c55e;
 }
 
 .badge {

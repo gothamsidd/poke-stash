@@ -1,10 +1,11 @@
 .dark .auth-page {
-  background: #4a5568;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
 .dark .auth-container {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .dark .auth-container h2 {
@@ -20,6 +21,13 @@
   background: var(--bg-primary);
   border-color: var(--border-color);
   color: var(--text-primary);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.dark .form-group input:focus,
+.dark .form-group select:focus {
+  border-color: var(--accent-color);
+  background: #1a1f2e;
 }
 
 .dark .auth-link {
@@ -27,15 +35,22 @@
 }
 
 .dark .auth-link a {
-  color: #667eea;
+  color: var(--accent-color);
+  transition: color 0.3s;
+}
+
+.dark .auth-link a:hover {
+  color: var(--accent-hover);
 }
 
 .dark .btn-google {
   background: var(--card-bg);
   border-color: var(--border-color);
   color: var(--text-primary);
+  transition: all 0.3s;
 }
 
 .dark .btn-google:hover {
   background: var(--bg-secondary);
+  border-color: var(--accent-color);
 }

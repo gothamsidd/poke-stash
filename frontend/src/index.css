@@ -49,15 +49,23 @@ html {
   --text-secondary: #7f8c8d;
   --border-color: #e0e0e0;
   --card-bg: #ffffff;
+  --accent-color: #667eea;
+  --accent-hover: #5568d3;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
 }
 
 .dark {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2c2c2c;
-  --text-primary: #ecf0f1;
-  --text-secondary: #bdc3c7;
-  --border-color: #34495e;
-  --card-bg: #2c3e50;
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --border-color: #334155;
+  --card-bg: #1e293b;
+  --accent-color: #818cf8;
+  --accent-hover: #6366f1;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
 }
 
 body {

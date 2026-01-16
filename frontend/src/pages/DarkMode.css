@@ -4,12 +4,19 @@
 }
 
 .dark .hero {
-  background: #4a5568;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
 .dark .stat-item {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.dark .stat-item:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 6px 20px rgba(129, 140, 248, 0.2);
 }
 
 .dark .stat-number {
@@ -31,11 +38,26 @@
 .dark .pokemon-showcase-item {
   background: var(--card-bg);
   border-color: var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.dark .pokemon-showcase-item:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 24px rgba(129, 140, 248, 0.15);
+  transform: translateY(-2px);
 }
 
 .dark .feature-card {
   background: var(--card-bg);
   border-color: var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.dark .feature-card:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 24px rgba(129, 140, 248, 0.15);
 }
 
 .dark .feature-card h3 {
@@ -47,12 +69,13 @@
 }
 
 .dark .stats-section {
-  background: #4a5568;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
 .dark .stat-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(129, 140, 248, 0.1);
+  border-color: rgba(129, 140, 248, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .dark .cta-section {

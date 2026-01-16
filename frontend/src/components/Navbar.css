@@ -11,7 +11,9 @@
 }
 
 .dark .navbar {
-  background: #4a5568;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-content {
@@ -154,6 +156,12 @@
   border: 1px solid #e0e0e0;
 }
 
+.dark .profile-dropdown {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
 .dropdown-header {
   display: flex;
   align-items: center;
@@ -236,6 +244,15 @@
 .dropdown-item:hover {
   background: #f8f9fa;
   color: #667eea;
+}
+
+.dark .dropdown-item {
+  color: var(--text-primary);
+}
+
+.dark .dropdown-item:hover {
+  background: var(--bg-secondary);
+  color: var(--accent-color);
 }
 
 .dropdown-item.logout-item {
