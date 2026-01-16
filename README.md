@@ -172,11 +172,18 @@ Note: QR codes only work in live mode, not test mode.
 ## Environment variables
 
 Check `backend/env.example` for all required environment variables. Make sure to set up:
-- MongoDB connection string
-- JWT secret
-- Razorpay keys
-- Gemini API key (optional, for AI features)
-- Google OAuth credentials (optional, for Google login)
+
+**Required:**
+- `MONGODB_URI` - MongoDB connection string
+- `JWT_SECRET` - Secret key for JWT token signing
+- `RAZORPAY_KEY_ID` - Razorpay API key ID
+- `RAZORPAY_KEY_SECRET` - Razorpay API secret key
+
+**Optional:**
+- `GEMINI_API_KEY` - For AI-generated product descriptions
+- `GOOGLE_CLIENT_ID` - For Google OAuth login
+- `GOOGLE_CLIENT_SECRET` - For Google OAuth login
+- `SESSION_SECRET` - Secret for session management
 
 ## Scripts
 
