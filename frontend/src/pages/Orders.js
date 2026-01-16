@@ -36,7 +36,8 @@ const Orders = () => {
     }
 
     fetchOrders();
-  }, [user, location]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, location, navigate, showSuccess]);
 
   const fetchOrders = async () => {
     try {

@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { ToastContext } from '../context/ToastContext';
-import { ThemeContext } from '../context/ThemeContext';
 import './Auth.css';
 import './DarkModeAuth.css';
 
@@ -12,7 +11,6 @@ const Login = () => {
   const [oauthRole, setOauthRole] = useState('customer');
   const { login } = useContext(AuthContext);
   const { success, error: showError } = useContext(ToastContext);
-  const { darkMode } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
