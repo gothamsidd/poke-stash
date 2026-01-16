@@ -398,11 +398,23 @@ const seedPokemon = async () => {
       // Create a default seller
       seller = await User.create({
         name: 'Pokemon Store Admin',
-        email: 'admin@pokemonstore.com',
+        email: 'admin@pokestash.com',
         password: 'admin123',
         role: 'seller'
       });
       console.log('✅ Created default seller account');
+    }
+
+    // Get or create default customer user
+    let customer = await User.findOne({ email: 'customer@pokestash.com' });
+    if (!customer) {
+      customer = await User.create({
+        name: 'Test Customer',
+        email: 'customer@pokestash.com',
+        password: 'customer123',
+        role: 'customer'
+      });
+      console.log('✅ Created default customer account');
     }
 
     console.log(`\n🌱 Starting to seed ${POPULAR_POKEMON.length} Pokemon...\n`);
