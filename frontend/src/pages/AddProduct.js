@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { ToastContext } from '../context/ToastContext';
 import PokemonSearch from '../components/PokemonSearch';
 import './AddProduct.css';
 import './DarkModeAddProduct.css';
