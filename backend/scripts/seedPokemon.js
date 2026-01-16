@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import axios from 'axios';
+import crypto from 'crypto';
 import Product from '../models/Product.model.js';
 import User from '../models/User.model.js';
 
@@ -399,7 +400,7 @@ const seedPokemon = async () => {
       seller = await User.create({
         name: 'Pokemon Store',
         email: `seller-${Date.now()}@pokestash.com`,
-        password: require('crypto').randomBytes(16).toString('hex'),
+        password: crypto.randomBytes(16).toString('hex'),
         role: 'seller'
       });
       console.log('✅ Created default seller account for products');
