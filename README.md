@@ -1,12 +1,8 @@
 # PokeStash
 
-A Pokemon sticker marketplace where you can buy and sell digital Pokemon stickers. Built this as a full-stack project to practice React, Node.js, and payment integrations.
+A Pokemon sticker marketplace I built to learn full-stack development. You can browse hundreds of Pokemon stickers, add them to your cart, and buy them. Sellers can list their products, manage inventory, and see their sales. Payments are handled through Razorpay, so you can pay with UPI, cards, netbanking, or wallets.
 
-## What it does
-
-You can browse through hundreds of Pokemon stickers, add them to your cart, and purchase them. Sellers can create listings, manage their products, and track sales. The whole payment flow is handled through Razorpay, so you can pay via UPI, cards, netbanking, or wallets.
-
-## Tech stack
+## What I Used
 
 **Frontend:**
 - React for the UI
@@ -21,21 +17,14 @@ You can browse through hundreds of Pokemon stickers, add them to your cart, and 
 - Razorpay for payments
 - Google Gemini API for AI-generated product descriptions
 
-## Getting started
+## Getting Started
 
-### Prerequisites
-
-You'll need Node.js installed (v16 or higher works fine). Also need a MongoDB database - you can use MongoDB Atlas (free tier) or run it locally.
+You'll need Node.js (v16 or higher) and a MongoDB database. You can use MongoDB Atlas (free tier) or run it locally.
 
 ### Installation
 
-1. Clone the repo:
-```bash
-git clone <your-repo-url>
-cd poke-stash
-```
+1. Clone the repo and install dependencies:
 
-2. Install dependencies:
 ```bash
 # Backend
 cd backend
@@ -46,7 +35,7 @@ cd ../frontend
 npm install
 ```
 
-3. Set up environment variables:
+2. Set up environment variables:
 
 Create `backend/.env`:
 ```
@@ -67,14 +56,17 @@ REACT_APP_API_URL=http://localhost:5001/api
 REACT_APP_RAZORPAY_KEY_ID=your_razorpay_key
 ```
 
-4. Seed the database (optional):
+3. (Optional) Seed the database with Pokemon stickers:
+
 ```bash
 cd backend
 npm run seed
 ```
-This adds 900+ Pokemon stickers to your database with all their stats and details.
 
-5. Run the app:
+This adds 900+ Pokemon stickers with all their stats and details. Takes about 5-10 minutes.
+
+4. Run the app:
+
 ```bash
 # Terminal 1 - Backend
 cd backend
@@ -85,31 +77,30 @@ cd frontend
 npm start
 ```
 
-The app should be running on `http://localhost:3000`.
+Open `http://localhost:3000` in your browser.
 
 ## Features
 
-- **Product browsing**: Search, filter by category, generation, legendary status, etc.
-- **Shopping cart**: Add items, update quantities, apply coupon codes
-- **Checkout**: Full payment flow with Razorpay (UPI, cards, netbanking, wallets)
-- **Order management**: Track orders, download purchased stickers
-- **Seller dashboard**: Create products, manage inventory, view sales
-- **User authentication**: Register, login, OAuth with Google
-- **Dark mode**: Toggle between light and dark themes
-- **AI descriptions**: Auto-generate product descriptions using Gemini
+- Browse and search Pokemon stickers with filters (category, generation, rarity, etc.)
+- Shopping cart with quantity management
+- Full checkout flow with Razorpay (supports UPI, cards, netbanking, wallets)
+- Order tracking and management
+- Seller dashboard to create products, manage inventory, and view sales
+- User authentication (register, login, Google OAuth)
+- Dark mode toggle
+- AI-generated product descriptions using Gemini
 
-## Default accounts
+## Test Account
 
-After seeding the database, you'll have a default customer account for testing:
+After seeding the database, you can use this test account:
 
-**Customer Account:**
 - **Email:** `customer@pokestash.com`
 - **Password:** `customer123`
-- **Role:** Customer (can browse products, add to cart, and make purchases)
+- **Role:** Customer
 
-**Note:** You can create seller and customer accounts through the registration page.
+You can also create your own accounts through the registration page.
 
-## Project structure
+## Project Structure
 
 ```
 poke-stash/
@@ -130,9 +121,9 @@ poke-stash/
 └── README.md
 ```
 
-## API endpoints
+## API Endpoints
 
-Most endpoints require authentication. Here are the main ones:
+Most endpoints require authentication. Main ones:
 
 **Auth:**
 - `POST /api/auth/register` - Register new user
@@ -160,18 +151,18 @@ Most endpoints require authentication. Here are the main ones:
 - `PUT /api/users/cart/:itemId` - Update quantity
 - `DELETE /api/users/cart/:itemId` - Remove item
 
-## Payment setup
+## Payment Setup
 
 1. Create a Razorpay account at https://razorpay.com
 2. Get your test API keys from the dashboard
 3. Add them to both `backend/.env` and `frontend/.env`
-4. For live mode, you'll need to deploy the site and get it approved by Razorpay
+4. For live mode, deploy the site and get it approved by Razorpay
 
 Note: QR codes only work in live mode, not test mode.
 
-## Environment variables
+## Environment Variables
 
-Check `backend/env.example` for all required environment variables. Make sure to set up:
+Check `backend/env.example` for all required environment variables.
 
 **Required:**
 - `MONGODB_URI` - MongoDB connection string
@@ -185,13 +176,14 @@ Check `backend/env.example` for all required environment variables. Make sure to
 - `GOOGLE_CLIENT_SECRET` - For Google OAuth login
 - `SESSION_SECRET` - Secret for session management
 
-## Scripts
+## Available Scripts
 
 **Backend:**
 - `npm start` - Start server
 - `npm run seed` - Seed database with Pokemon
 - `npm run update-prices` - Update all prices to ₹10-₹99 range
 - `npm run fix-stock` - Fix products with zero stock
+- `npm run fix-test-account` - Reset test account password
 
 **Frontend:**
 - `npm start` - Start dev server
@@ -202,7 +194,7 @@ Check `backend/env.example` for all required environment variables. Make sure to
 - The app uses test mode for Razorpay by default. Switch to live mode after deployment.
 - Product images are stored in `backend/uploads/products/`
 - The database seeding script fetches Pokemon data from PokeAPI
-- OAuth requires Google Cloud Console setup (see the code for details)
+- OAuth requires Google Cloud Console setup
 
 ## License
 

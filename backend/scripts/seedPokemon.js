@@ -416,6 +416,11 @@ const seedPokemon = async () => {
         role: 'customer'
       });
       console.log('✅ Created default customer account');
+    } else {
+      // Update password if user exists (to ensure it's correct)
+      customer.password = 'customer123';
+      await customer.save();
+      console.log('✅ Updated test customer account password');
     }
 
     console.log(`\n🌱 Starting to seed ${POPULAR_POKEMON.length} Pokemon...\n`);

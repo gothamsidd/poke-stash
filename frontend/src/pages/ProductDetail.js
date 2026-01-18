@@ -93,24 +93,28 @@ const ProductDetail = () => {
       <div className="container">
         <div className="product-detail-layout">
           <div className="product-images">
-            <div className="main-image">
-              <img
-                src={getImageUrl(product.images[selectedImage])}
-                alt={product.name}
-              />
-            </div>
-            {product.images.length > 1 && (
-              <div className="thumbnail-images">
-                {product.images.map((img, idx) => (
+            {product.images && product.images.length > 0 && (
+              <>
+                <div className="main-image">
                   <img
-                    key={idx}
-                    src={getImageUrl(img)}
-                    alt={`${product.name} ${idx + 1}`}
-                    className={selectedImage === idx ? 'active' : ''}
-                    onClick={() => setSelectedImage(idx)}
+                    src={getImageUrl(product.images[selectedImage] || product.images[0])}
+                    alt={product.name}
                   />
-                ))}
-              </div>
+                </div>
+                {product.images.length > 1 && (
+                  <div className="thumbnail-images">
+                    {product.images.map((img, idx) => (
+                      <img
+                        key={idx}
+                        src={getImageUrl(img)}
+                        alt={`${product.name} ${idx + 1}`}
+                        className={selectedImage === idx ? 'active' : ''}
+                        onClick={() => setSelectedImage(idx)}
+                      />
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </div>
 
@@ -212,14 +216,14 @@ const ProductDetail = () => {
                     <strong>Total Base Stats: {product.pokemonData.baseStats.total}</strong>
                   </div>
                 )}
-                {product.pokemonData.types && product.pokemonData.types.length > 0 && (
+                {product.pokemonData?.types && Array.isArray(product.pokemonData.types) && product.pokemonData.types.length > 0 && (
                   <div className="pokemon-types">
                     <strong>Types:</strong> {product.pokemonData.types.map(t => (
                       <span key={t} className="type-badge">{t}</span>
                     ))}
                   </div>
                 )}
-                {product.pokemonData.abilities && product.pokemonData.abilities.length > 0 && (
+                {product.pokemonData?.abilities && Array.isArray(product.pokemonData.abilities) && product.pokemonData.abilities.length > 0 && (
                   <div className="pokemon-abilities">
                     <strong>Abilities:</strong> {product.pokemonData.abilities.map(a => (
                       <span key={a} className="ability-badge">{a}</span>
@@ -248,45 +252,96 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {product.stock > 0 ? (
-              <div className="purchase-section">
-                <div className="quantity-selector">
-                  <label>Quantity:</label>
-                  <div className="quantity-controls">
-                    <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
-                    <input
-                      type="number"
-                      value={quantity}
-                      onChange={(e) => setQuantity(Math.max(1, Math.min(product.stock, parseInt(e.target.value) || 1)))}
-                      min="1"
-                      max={product.stock}
-                    />
-                    <button onClick={() => setQuantity(q => Math.min(product.stock, q + 1))}>+</button>
+            {/* Check if user is the seller/admin of this product */}
+            {(() => {
+              const isOwner = user && product.seller && (
+                (typeof product.seller === 'object' && product.seller._id && product.seller._id.toString() === user._id.toString()) ||
+                (typeof product.seller === 'string' && product.seller.toString() === user._id.toString()) ||
+                user.role === 'admin'
+              );
+
+              if (isOwner) {
+                return (
+                  <div className="purchase-section">
+                    <p style={{ marginBottom: '15px', color: '#7f8c8d', fontSize: '14px' }}>
+                      This is your product. You can edit or manage it from your dashboard.
+                    </p>
+                    <button
+                      onClick={() => navigate(`/products/${id}/edit`)}
+                      className="btn btn-primary btn-large"
+                    >
+                      Edit Product
+                    </button>
+                    <button
+                      onClick={() => navigate('/dashboard')}
+                      className="btn btn-secondary btn-large"
+                    >
+                      Go to Dashboard
+                    </button>
                   </div>
+                );
+              }
+
+              if (!user && product.stock > 0) {
+                return (
+                  <div className="purchase-section">
+                    <p style={{ marginBottom: '15px', color: '#7f8c8d' }}>
+                      Please login to purchase this product
+                    </p>
+                    <button
+                      onClick={() => navigate('/login')}
+                      className="btn btn-primary btn-large"
+                    >
+                      Login to Buy
+                    </button>
+                  </div>
+                );
+              }
+
+              if (product.stock > 0) {
+                return (
+                  <div className="purchase-section">
+                    <div className="quantity-selector">
+                      <label>Quantity:</label>
+                      <div className="quantity-controls">
+                        <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
+                        <input
+                          type="number"
+                          value={quantity}
+                          onChange={(e) => setQuantity(Math.max(1, Math.min(product.stock, parseInt(e.target.value) || 1)))}
+                          min="1"
+                          max={product.stock}
+                        />
+                        <button onClick={() => setQuantity(q => Math.min(product.stock, q + 1))}>+</button>
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleAddToCart}
+                      disabled={addingToCart}
+                      className="btn btn-primary btn-large"
+                    >
+                      {addingToCart ? 'Adding...' : 'Add to Cart'}
+                    </button>
+                    <button
+                      onClick={() => navigate('/checkout', { state: { items: [{ product: id, quantity }] } })}
+                      className="btn btn-secondary btn-large"
+                    >
+                      Buy Now
+                    </button>
+                  </div>
+                );
+              }
+
+              return (
+                <div className="out-of-stock-message">
+                  This product is currently out of stock
                 </div>
-                <button
-                  onClick={handleAddToCart}
-                  disabled={addingToCart}
-                  className="btn btn-primary btn-large"
-                >
-                  {addingToCart ? 'Adding...' : 'Add to Cart'}
-                </button>
-                <button
-                  onClick={() => navigate('/checkout', { state: { items: [{ product: id, quantity }] } })}
-                  className="btn btn-secondary btn-large"
-                >
-                  Buy Now
-                </button>
-              </div>
-            ) : (
-              <div className="out-of-stock-message">
-                This product is currently out of stock
-              </div>
-            )}
+              );
+            })()}
           </div>
         </div>
 
-        {recommendations.length > 0 && (
+        {recommendations && Array.isArray(recommendations) && recommendations.length > 0 && (
           <section className="recommendations-section">
             <h2>You Might Also Like</h2>
             <div className="recommendations-grid">
@@ -296,9 +351,9 @@ const ProductDetail = () => {
                   className="recommendation-card"
                   onClick={() => navigate(`/products/${rec._id}`)}
                 >
-                  <img src={getImageUrl(rec.images[0])} alt={rec.name} />
+                  <img src={getImageUrl(rec.images && rec.images.length > 0 ? rec.images[0] : '')} alt={rec.name || 'Product'} />
                   <h4>{rec.name}</h4>
-                  <span className="price">₹{rec.price}</span>
+                  <span className="price">₹{rec.price || 0}</span>
                 </div>
               ))}
             </div>

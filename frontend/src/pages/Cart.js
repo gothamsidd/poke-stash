@@ -135,7 +135,7 @@ const Cart = () => {
             {cart.items.map(item => (
               <div key={item._id} className="cart-item">
                 <img
-                  src={getImageUrl(item.product.images[0])}
+                  src={getImageUrl(item.product.images && item.product.images.length > 0 ? item.product.images[0] : '')}
                   alt={item.product.name}
                 />
                 <div className="item-info">

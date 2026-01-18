@@ -132,6 +132,46 @@ router.get('/cart', protect, async (req, res, next) => {
       }
     ).populate('items.product', 'name price images stock status');
 
+    // Deduplicate cart items - merge items with same product ID
+    if (cart && cart.items && cart.items.length > 0) {
+      const productMap = new Map();
+      
+      // Group items by product ID
+      cart.items.forEach(item => {
+        if (!item || !item.product) return; // Skip invalid items
+        
+        const productId = item.product._id 
+          ? item.product._id.toString() 
+          : (typeof item.product === 'string' ? item.product.toString() : null);
+        
+        if (!productId) return; // Skip if product ID cannot be determined
+        
+        if (productMap.has(productId)) {
+          // Merge with existing item - add quantities
+          const existingItem = productMap.get(productId);
+          existingItem.quantity += (item.quantity || 1);
+        } else {
+          // First occurrence of this product
+          productMap.set(productId, {
+            _id: item._id,
+            product: item.product,
+            quantity: item.quantity || 1
+          });
+        }
+      });
+      
+      // Convert map back to array
+      const deduplicatedItems = Array.from(productMap.values());
+      
+      // Only update if there were duplicates
+      if (deduplicatedItems.length !== cart.items.length) {
+        cart.items = deduplicatedItems;
+        await cart.save();
+        // Re-populate after save
+        await cart.populate('items.product', 'name price images stock status');
+      }
+    }
+
     res.json({
       success: true,
       cart
@@ -142,6 +182,31 @@ router.get('/cart', protect, async (req, res, next) => {
       // Cart already exists, just fetch it
       const cart = await Cart.findOne({ user: req.user._id })
         .populate('items.product', 'name price images stock status');
+      
+      // Deduplicate if needed
+      if (cart && cart.items && cart.items.length > 0) {
+        const productMap = new Map();
+        cart.items.forEach(item => {
+          const productId = item.product._id ? item.product._id.toString() : item.product.toString();
+          if (productMap.has(productId)) {
+            const existingItem = productMap.get(productId);
+            existingItem.quantity += item.quantity;
+          } else {
+            productMap.set(productId, {
+              _id: item._id,
+              product: item.product,
+              quantity: item.quantity
+            });
+          }
+        });
+        const deduplicatedItems = Array.from(productMap.values());
+        if (deduplicatedItems.length !== cart.items.length) {
+          cart.items = deduplicatedItems;
+          await cart.save();
+          await cart.populate('items.product', 'name price images stock status');
+        }
+      }
+      
       return res.json({
         success: true,
         cart
@@ -190,9 +255,13 @@ router.post('/cart', protect, async (req, res, next) => {
     // If cart was just created, it will have empty items array
     // If cart already existed, it will have its existing items
 
-    const existingItemIndex = cart.items.findIndex(
-      item => item.product.toString() === productId
-    );
+    // Find existing item - handle both populated and unpopulated product
+    const existingItemIndex = cart.items.findIndex(item => {
+      const itemProductId = item.product._id 
+        ? item.product._id.toString() 
+        : item.product.toString();
+      return itemProductId === productId.toString();
+    });
 
     if (existingItemIndex > -1) {
       // Check if new total quantity exceeds stock

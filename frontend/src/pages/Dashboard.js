@@ -41,7 +41,14 @@ const Dashboard = () => {
         axios.get(`${API_URL}/products?seller=${user._id}&limit=50&sort=${sortBy}`)
       ]);
       setStats(statsRes.data.stats);
-      setProducts(productsRes.data.products || []);
+      
+      // Deduplicate products by _id to prevent showing duplicates
+      const products = productsRes.data.products || [];
+      const uniqueProducts = products.filter((product, index, self) =>
+        index === self.findIndex(p => p._id === product._id)
+      );
+      setProducts(uniqueProducts);
+      
       if (statsRes.data.orders) {
         setOrders(statsRes.data.orders);
       }

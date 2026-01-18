@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../utils/apiConfig';
 import './SearchAutocomplete.css';
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const SearchAutocomplete = ({ value, onChange, onSelect }) => {
   const [suggestions, setSuggestions] = useState([]);

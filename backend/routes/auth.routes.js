@@ -159,9 +159,24 @@ router.post('/login', [
 
     const { email, password } = req.body;
 
+    // Normalize email (lowercase and trim) to match schema
+    const normalizedEmail = email.toLowerCase().trim();
+
     // Check if user exists and get password
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email: normalizedEmail }).select('+password');
     if (!user) {
+      // Log for debugging in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`❌ Login attempt failed: User not found - ${normalizedEmail}`);
+      }
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+    }
+
+    // Check if user has a password (OAuth users might not)
+    if (!user.password) {
       return res.status(401).json({
         success: false,
         message: 'Invalid credentials'
@@ -171,6 +186,10 @@ router.post('/login', [
     // Check password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
+      // Log for debugging in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`❌ Login attempt failed: Password mismatch - ${normalizedEmail}`);
+      }
       return res.status(401).json({
         success: false,
         message: 'Invalid credentials'

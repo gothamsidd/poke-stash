@@ -10,7 +10,8 @@
     "seed": "node scripts/seedPokemon.js",
     "update-prices": "node scripts/updatePrices.js",
     "fix-stock": "node scripts/fixStock.js",
-    "create-coupon": "node scripts/createCoupon.js"
+    "create-coupon": "node scripts/createCoupon.js",
+    "fix-test-account": "node scripts/fixTestAccount.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.2.1",

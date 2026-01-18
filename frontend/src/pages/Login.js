@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { ToastContext } from '../context/ToastContext';
+import { API_URL } from '../utils/apiConfig';
 import './Auth.css';
 import './DarkModeAuth.css';
 
@@ -101,7 +102,7 @@ const Login = () => {
           </div>
           
           <a 
-            href={`${process.env.REACT_APP_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:5001/api' : '/api')}/auth/google?role=${oauthRole}`}
+            href={`${API_URL}/auth/google?role=${oauthRole}`}
             className="btn-google"
             style={{
               display: 'flex',
