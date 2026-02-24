@@ -1,11 +1,18 @@
+# Dependencies
 node_modules/
+
+# Environment variables (never commit secrets)
 .env
 .env.local
 .env.development
 .env.production
 .env.test
-*.env
 .env.*
+*.env
+
+# Uploads
 uploads/
+
+# Logs
 *.log
 .DS_Store
